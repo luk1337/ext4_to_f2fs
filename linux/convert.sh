@@ -17,8 +17,13 @@ patch -p0 < patches/updater-script.patch
 # Patching ramdisk
 mv .rom/boot.img .
 tools/split_boot boot.img
-patch -p0 < patches/fstab.patch
-patch -p0 < patches/init.capri.patch
+if [ -f "boot/ramdisk/fstab.capri_ss_s2ve" ]; then #s2ve
+	cat patches/fstab.patch | sed 's/s2vep/s2ve/g' | patch -p0
+        cat patches/init.capri.patch | sed 's/s2vep/s2ve/g' | patch -p0
+else
+	patch -p0 < patches/fstab.patch
+	patch -p0 < patches/init.capri.patch
+fi
 
 # Downloading F2FS binaries
 wget https://raw.githubusercontent.com/SamsungBCM-Cyanogenmod/android_device_samsung_s2vep/9efea0c9dcb970c1ca9ab3b6c1a38d115fe76b33/ramdisk/sbin/automount -O boot/ramdisk/sbin/automount
