@@ -19,7 +19,7 @@ mv .rom/boot.img .
 tools/split_boot boot.img
 if [ -f "boot/ramdisk/fstab.capri_ss_s2ve" ]; then #s2ve
 	cat patches/fstab.patch | sed 's/s2vep/s2ve/g' | patch -p0
-        cat patches/init.capri.patch | sed 's/s2vep/s2ve/g' | patch -p0
+	cat patches/init.capri.patch | sed 's/s2vep/s2ve/g' | patch -p0
 else
 	patch -p0 < patches/fstab.patch
 	patch -p0 < patches/init.capri.patch
