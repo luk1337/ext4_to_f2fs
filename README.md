@@ -9,6 +9,7 @@ Compatability
 Usage
 -----
 Linux:
+
     cd linux
     chmod +x convert.sh
     ./convert.sh [ROM_NAME].zip
