@@ -1,0 +1,21 @@
+--- .rom/META-INF/com/google/android/updater-script.orig	2014-08-06 21:46:24.070031548 +0200
++++ .rom/META-INF/com/google/android/updater-script	        2014-08-06 21:49:39.129669921 +0200
+@@ -1,6 +1,6 @@
+ (!less_than_int(1407349781, getprop("ro.build.date.utc"))) || abort("Can't install this package (Wed Aug  6 20:29:41 CEST 2014) over newer build (" + getprop("ro.build.date") + ").");
+ assert(getprop("ro.product.device") == "s2vep" || getprop("ro.build.product") == "s2vep" || abort("This package is for \"s2vep\" devices; this is a \"" + getprop("ro.product.device") + "\"."););
+-mount("ext4", "EMMC", "/dev/block/mmcblk0p19", "/system");
++run_program("/sbin/busybox", "mount", "/system");
+ delete("/system/addon.d/99-supersu.sh");
+ package_extract_file("system/bin/backuptool.sh", "/tmp/backuptool.sh");
+ package_extract_file("system/bin/backuptool.functions", "/tmp/backuptool.functions");
+@@ -9,8 +9,8 @@
+ run_program("/tmp/backuptool.sh", "backup");
+ unmount("/system");
+ show_progress(0.500000, 0);
+-format("ext4", "EMMC", "/dev/block/mmcblk0p19", "0", "/system");
+-mount("ext4", "EMMC", "/dev/block/mmcblk0p19", "/system");
++run_program("/sbin/mkfs.f2fs", "/dev/block/mmcblk0p19");
++run_program("/sbin/busybox", "mount", "/system");
+ package_extract_dir("recovery", "/system");
+ package_extract_dir("system", "/system");
+ symlink("../bin/fsck.f2fs", "/system/bin/dump.f2fs");

@@ -1,0 +1,13 @@
+--- boot/ramdisk/file_contexts.orig	2014-08-06 23:04:13.485975444 +0200
++++ boot/ramdisk/file_contexts       	2014-08-06 23:04:23.698133714 +0200
+@@ -16,6 +16,10 @@
+ /init			u:object_r:rootfs:s0
+ /sbin(/.*)?		u:object_r:rootfs:s0
+ 
++/sbin/sh                u:object_r:shell_exec:s0
++/sbin/busybox           u:object_r:shell_exec:s0
++/sbin/automount         u:object_r:shell_exec:s0
++
+ # Empty directories
+ /lost\+found		u:object_r:rootfs:s0
+ /proc			u:object_r:rootfs:s0

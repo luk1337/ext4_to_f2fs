@@ -1,0 +1,27 @@
+--- boot/ramdisk/init.capri_ss_s2vep.rc.orig	2014-08-06 22:36:30.625430184 +0200
++++ boot/ramdisk/init.capri_ss_s2vep.rc		2014-08-06 22:36:51.285923333 +0200
+@@ -7,6 +7,10 @@
+     mkdir /efs 0771 radio system
+ 
+ on init
++    chmod 0755 /sbin/busybox
++    chmod 0755 /sbin/automount
++    symlink /sbin/busybox /sbin/sh
++
+     # Videocore
+     chmod 0660 /proc/vc-dnfo
+     write /proc/vc-dnfo "width 480"
+@@ -667,6 +671,13 @@
+     start icd
+ 
+ on fs
++    wait /dev/block/mmcblk0p19
++    wait /dev/block/mmcblk0p21
++    wait /dev/block/mmcblk0p18
++    wait /dev/block/mmcblk0p20
++    wait /proc/mounts
++    exec /sbin/automount
++
+     mount_all /fstab.capri_ss_s2vep
+     setprop ro.crypto.fuse_sdcard true
+
