@@ -1,4 +1,4 @@
-GitHub Markup
+EXT to F2FS ROM converter
 =============
 This is a simple tool for converting EXT4 roms to F2FS.
 
