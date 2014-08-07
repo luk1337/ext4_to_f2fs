@@ -16,7 +16,7 @@ Linux:
 
 Windows:
 
-    Install cygwin with patch, unzip, zip, sed, wget, bash and copy files to cygwin home catalog
+    Install cygwin with patch, unzip, zip, wget, cpio, perl and copy files to cygwin home catalog
     cd linux
     chmod +x convert.sh
     ./convert.sh
