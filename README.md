@@ -13,3 +13,9 @@ Linux:
     cd linux
     chmod +x convert.sh
     ./convert.sh [ROM_NAME].zip
+
+Windows:
+
+    Run command prompt as administrator
+    cd windows
+    convert.bat [ROM_NAME].zip
