@@ -16,6 +16,7 @@ Linux:
 
 Windows:
 
-    Run command prompt as administrator
-    cd windows
-    convert.bat [ROM_NAME].zip
+    Install cygwin with patch, unzip, zip, sed, wget, bash and copy files to cygwin home catalog
+    cd linux
+    chmod +x convert.sh
+    ./convert.sh
