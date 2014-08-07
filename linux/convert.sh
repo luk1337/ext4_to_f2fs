@@ -9,7 +9,7 @@ fi
 chmod +x tools/*
 
 # Unzipping rom
-unzip "$ROM" -d ".rom"
+unzip -o "$ROM" -d ".rom"
 
 # Patching updater script
 patch -p0 < patches/updater-script.patch
