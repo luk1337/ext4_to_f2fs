@@ -5,7 +5,7 @@ This is a simple tool for converting EXT4 roms to F2FS.
 Compatability
 -----
 * Paranoid Android (Since 4.5-BETA1)
-* PAC-ROM (since 20140807)
+* PAC-ROM (Since 20140807)
 
 Usage
 -----
