@@ -2,6 +2,8 @@
 
 set ROM="%1"
 
+GOTO error_3
+
 IF [%ROM%] == [] GOTO error_1
 
 NET SESSION >nul 2>&1
@@ -53,6 +55,10 @@ goto done
 
 :error_2
 echo [ERROR] Admin rights are required
+goto done
+
+:error_3
+echo [ERROR] Windows version is currently broken, please use Linux version with Cygwin
 goto done
 
 :done
