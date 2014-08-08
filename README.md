@@ -2,6 +2,11 @@ EXT to F2FS ROM converter
 =============
 This is a simple tool for converting EXT4 roms to F2FS.
 
+Supported devices:
+-----
+* Galaxy S2 Plus (NFC)
+* Galaxy S2 Plus (Non-NFC)
+
 Compatability
 -----
 * Paranoid Android (Since 4.5-BETA1)
