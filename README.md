@@ -6,6 +6,7 @@ Compatability
 -----
 * Paranoid Android (Since 4.5-BETA1)
 * PAC-ROM (Since 20140807)
+* Dirty Unicorns (Since 20140808)
 
 Usage
 -----
