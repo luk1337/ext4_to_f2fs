@@ -12,18 +12,28 @@ chmod +x tools/*
 unzip -o "$ROM" -d ".rom"
 
 # Patching updater script
-patch -p0 < patches/updater-script.patch
+
+sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "\/system");/run_program("\/sbin\/busybox", "mount", "\/system");/g' .rom/META-INF/com/google/android/updater-script
+sed -i 's/format("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "0", "\/system");/run_program("\/sbin\/mkfs.f2fs", "\/dev\/block\/mmcblk0p19");/g' .rom/META-INF/com/google/android/updater-script
+sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p21", "\/data");/run_program("\/sbin\/busybox", "mount", "\/data");/g' .rom/META-INF/com/google/android/updater-script
 
 # Patching ramdisk
 mv .rom/boot.img .
 tools/split_boot boot.img
 rm -rf boot.img
-if [ -f "boot/ramdisk/fstab.capri_ss_s2ve" ]; then #s2ve
+if [ -f "boot/ramdisk/fstab.capri_ss_s2vep" ]; then #s2vep
+        patch -p0 < patches/fstab.patch
+        patch -p0 < patches/init.capri.patch
+elif [ -f "boot/ramdisk/fstab.capri_ss_s2ve" ]; then #s2ve
 	cat patches/fstab.patch | sed 's/s2vep/s2ve/g' | patch -p0
 	cat patches/init.capri.patch | sed 's/s2vep/s2ve/g' | patch -p0
+elif [ -f "boot/ramdisk/fstab.capri_ss_baffin" ]; then #baffin
+        cat patches/fstab.patch | sed 's/s2vep/baffin/g' | patch -p0
+        cat patches/init.capri.patch | sed 's/s2vep/baffin/g' | patch -p0
 else
-	patch -p0 < patches/fstab.patch
-	patch -p0 < patches/init.capri.patch
+	echo "[ERROR] Device/ROM is not compatible"
+	rm -rf .rom boot
+	exit
 fi
 
 # Downloading F2FS binaries

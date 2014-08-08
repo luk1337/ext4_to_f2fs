@@ -6,12 +6,16 @@ Supported devices:
 -----
 * Galaxy S2 Plus (NFC)
 * Galaxy S2 Plus (Non-NFC)
+* Galaxy Grand Duos
 
 ROM compatibility
 -----
+Galaxy S2 Plus:
 * Paranoid Android (Since 4.5-BETA1)
 * PAC-ROM (Since 20140807)
 * Dirty Unicorns (Since 20140808)
+Galaxy Grand Duos:
+* Currently no roms
 
 Usage
 -----
