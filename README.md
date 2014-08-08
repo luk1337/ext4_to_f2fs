@@ -7,7 +7,7 @@ Supported devices:
 * Galaxy S2 Plus (NFC)
 * Galaxy S2 Plus (Non-NFC)
 
-Compatability
+ROM compatibility
 -----
 * Paranoid Android (Since 4.5-BETA1)
 * PAC-ROM (Since 20140807)
