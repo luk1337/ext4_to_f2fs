@@ -1,0 +1,27 @@
+--- boot/ramdisk/init.capri_ss_baffin.rc.orig	2014-08-09 14:08:47.051413827 +0200
++++ boot/ramdisk/init.capri_ss_baffin.rc	2014-08-09 14:09:33.868339818 +0200
+@@ -9,6 +9,10 @@
+     mkdir /efs 0771 radio system
+ 
+ on init
++    chmod 0755 /sbin/busybox
++    chmod 0755 /sbin/automount
++    symlink /sbin/busybox /sbin/sh
++
+     # Vibetonz
+     export VIBE_PIPE_PATH /dev/pipes
+     mkdir /dev/pipes 0771 shell shell
+@@ -403,6 +407,13 @@
+     mkdir /data/misc/radio/hatp 0775 radio system
+ 
+ on fs
++    wait /dev/block/mmcblk0p19
++    wait /dev/block/mmcblk0p21
++    wait /dev/block/mmcblk0p18
++    wait /dev/block/mmcblk0p20
++    wait /proc/mounts
++    exec /sbin/automount
++
+     mount_all /fstab.capri_ss_baffin
+     setprop ro.crypto.fuse_sdcard true
+

@@ -22,3 +22,9 @@ Windows:
     cd linux
     chmod +x convert.sh
     ./convert.sh
+
+Credits
+-----
+* CoolDevelopment
+* k2wl
+* xenon92 for Nebula kernel source

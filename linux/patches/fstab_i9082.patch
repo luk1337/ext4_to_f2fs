@@ -1,0 +1,17 @@
+--- boot/ramdisk/fstab.capri_ss_baffin.orig	2014-08-09 14:01:24.466705411 +0200
++++ boot/ramdisk/fstab.capri_ss_baffin	2014-08-09 14:01:43.947086699 +0200
+@@ -4,10 +4,10 @@
+ # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+ # data partition must be located at the bottom for supporting device encryption
+ 
+-/dev/block/mmcblk0p19   /system            ext4       ro,noatime                                            wait
++#/dev/block/mmcblk0p19   /system            ext4       ro,noatime                                            wait
+ /dev/block/mmcblk0p17   /efs               ext4       noatime,nosuid,nodev,journal_async_commit,errors=panic wait,check
+-/dev/block/mmcblk0p18   /cache             ext4       noatime,nosuid,nodev,journal_async_commit,errors=panic wait,check
+-/dev/block/mmcblk0p21   /data              ext4       noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic    wait,check,encryptable=footer,length=-16384
++#/dev/block/mmcblk0p18   /cache             ext4       noatime,nosuid,nodev,journal_async_commit,errors=panic wait,check
++#/dev/block/mmcblk0p21   /data              ext4       noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic    wait,check,encryptable=footer,length=-16384
+ 
+ # Recovery
+ /dev/block/mmcblk0p5    /boot               emmc      defaults                                              defaults
+
