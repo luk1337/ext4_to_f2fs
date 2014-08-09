@@ -12,7 +12,6 @@ chmod +x tools/*
 unzip -o "$ROM" -d ".rom"
 
 # Patching updater script
-
 sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "\/system");/run_program("\/sbin\/busybox", "mount", "\/system");/g' .rom/META-INF/com/google/android/updater-script
 sed -i 's/format("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "0", "\/system");/run_program("\/sbin\/mkfs.f2fs", "\/dev\/block\/mmcblk0p19");/g' .rom/META-INF/com/google/android/updater-script
 sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p21", "\/data");/run_program("\/sbin\/busybox", "mount", "\/data");/g' .rom/META-INF/com/google/android/updater-script
