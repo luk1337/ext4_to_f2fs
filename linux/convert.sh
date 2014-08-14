@@ -2,6 +2,15 @@
 
 ROM="$1"
 
+if [ "$(whereis cpio)" = "cpio:" ]; then echo "[ERROR] cpio is not installed"; ERROR=1; fi
+if [ "$(whereis perl)" = "perl:" ]; then echo "[ERROR] perl is not installed"; ERROR=1; fi
+if [ "$(whereis zip)" = "zip:" ]; then echo "[ERROR] zip is not installed"; ERROR=1; fi
+if [ "$(whereis unzip)" = "unzip:" ]; then echo "[ERROR] unzip is not installed"; ERROR=1; fi
+if [ "$(whereis wget)" = "wget:" ]; then echo "[ERROR] wget is not installed"; ERROR=1; fi
+if [ "$(whereis patch)" = "patch:" ]; then echo "[ERROR] wget is not installed"; ERROR=1; fi
+
+if [ "$ERROR" = "1" ]; then exit; fi
+
 if [ -z "$ROM" ]; then
 	echo "[ERROR] Zip name is empty!"; exit
 fi
