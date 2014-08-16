@@ -27,4 +27,5 @@ Credits
 -----
 * CoolDevelopment
 * k2wl
+* rutvikrv
 * xenon92 for Nebula kernel source
