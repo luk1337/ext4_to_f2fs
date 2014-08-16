@@ -39,7 +39,8 @@ elif [ -f "boot/ramdisk/fstab.capri_ss_baffin" ]; then #baffin
 	patch -p0 < patches/fstab_i9082.patch
 	patch -p0 < patches/init.capri_i9082.patch
 	rm -rf boot/boot.img-kernel
-	cp patches/baffin_f2fs boot/boot.img-kernel
+	cp patches/baffin_f2fs/kernel boot/boot.img-kernel
+	cp -R patches/baffin_f2fs/modules .rom/system/
 else
 	echo "[ERROR] Device/ROM is not compatible"
 	rm -rf .rom boot
