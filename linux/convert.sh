@@ -20,6 +20,15 @@ chmod +x tools/*
 # Unzipping rom
 unzip -o "$ROM" -d ".rom"
 
+# Collect some useful informations
+temp=`od -A n -H -j 20 -N 4 .rom/boot.img | sed 's/ //g'`
+ramdisk_load_addr=0x$temp
+cmd_line=`od -A n --strings -j 64 -N 512 .rom/boot.img`
+base_temp=`od -A n -h -j 14 -N 2 .rom/boot.img | sed 's/ //g'`
+zeros=0000
+base=0x$base_temp$zeros
+page_size=`od -A n -D -j 36 -N 4 .rom/boot.img | sed 's/ //g'`
+
 # Patching updater script
 sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "\/system");/run_program("\/sbin\/busybox", "mount", "\/system");/g' .rom/META-INF/com/google/android/updater-script
 sed -i 's/format("ext4", "EMMC", "\/dev\/block\/mmcblk0p19", "0", "\/system");/run_program("\/sbin\/mkfs.f2fs", "\/dev\/block\/mmcblk0p19");/g' .rom/META-INF/com/google/android/updater-script
@@ -28,6 +37,7 @@ sed -i 's/mount("ext4", "EMMC", "\/dev\/block\/mmcblk0p21", "\/data");/run_progr
 # Patching ramdisk
 mv .rom/boot.img .
 tools/split_boot boot.img
+
 rm -rf boot.img
 if [ -f "boot/ramdisk/fstab.capri_ss_s2vep" ]; then #s2vep
 	patch -p0 < patches/fstab.patch
@@ -58,9 +68,9 @@ cd ..
 
 # Repacking boot image
 if [ `uname -o` = "Cygwin" ]; then
-	tools/mkbootimg.exe --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize 4096 --base 0xa2000000 --cmdline "console=ttyS0,115200n8 mem=832M@0xA2000000 androidboot.console=ttyS0 vc-cma-mem=0/176M@0xCB000000" -o .rom/boot.img
+	tools/mkbootimg.exe --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize "$page_size" --base "$base" --cmdline "$cmd_line" -o .rom/boot.img
 else
-	tools/mkbootimg --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize 4096 --base 0xa2000000 --ramdiskaddr 0xa3000000 --cmdline "console=ttyS0,115200n8 mem=832M@0xA2000000 androidboot.console=ttyS0 vc-cma-mem=0/176M@0xCB000000" -o .rom/boot.img
+	tools/mkbootimg --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize "$page_size" --base "$base" --ramdiskaddr "$ramdisk_load_addr" --cmdline "$cmd_line" -o .rom/boot.img
 fi
 
 # Repacking rom file
