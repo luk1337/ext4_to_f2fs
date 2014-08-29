@@ -22,7 +22,7 @@ chmod +x tools/*
 unzip -o "$ROM" -d ".rom"
 
 # Set dpi
-if [ ! "$DPI" ]; then
+if [ ! -z "$DPI" ]; then
 	sed -i "s/density=240/density=$DPI/g" .rom/system/build.prop
 fi
 
