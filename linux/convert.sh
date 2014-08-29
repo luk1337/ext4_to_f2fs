@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ROM="$1"
+DPI="$2"
 
 if [ "$(whereis cpio)" = "cpio:" ]; then echo "[ERROR] cpio is not installed"; ERROR=1; fi
 if [ "$(whereis perl)" = "perl:" ]; then echo "[ERROR] perl is not installed"; ERROR=1; fi
@@ -19,6 +20,11 @@ chmod +x tools/*
 
 # Unzipping rom
 unzip -o "$ROM" -d ".rom"
+
+# Set dpi
+if [ ! "$DPI" ]; then
+	sed -i "s/density=240/density=$DPI/g" .rom/system/build.prop
+fi
 
 # Collect some useful informations
 temp=`od -A n -H -j 20 -N 4 .rom/boot.img | sed 's/ //g'`
