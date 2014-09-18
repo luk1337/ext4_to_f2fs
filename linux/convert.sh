@@ -76,7 +76,7 @@ cd ..
 if [ `uname -o` = "Cygwin" ]; then
 	tools/mkbootimg.exe --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize "$page_size" --base "$base" --cmdline "$cmd_line" -o .rom/boot.img
 else
-	tools/mkbootimg --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize "$page_size" --base "$base" --ramdiskaddr "$ramdisk_load_addr" --cmdline "$cmd_line" -o .rom/boot.img
+	tools/mkbootimg --kernel boot/boot.img-kernel --ramdisk boot/boot.img-ramdisk.cpio.gz --pagesize "$page_size" --base "$base" --cmdline "$cmd_line" -o .rom/boot.img
 fi
 
 # Repacking rom file
