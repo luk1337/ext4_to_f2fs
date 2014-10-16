@@ -63,15 +63,11 @@ else
 	exit
 fi
 
-# Downloading F2FS binaries
-wget https://raw.githubusercontent.com/SamsungBCM-Cyanogenmod/android_device_samsung_s2vep/9efea0c9dcb970c1ca9ab3b6c1a38d115fe76b33/ramdisk/sbin/automount -O boot/ramdisk/sbin/automount
-wget https://github.com/SamsungBCM-Cyanogenmod/android_device_samsung_s2vep/blob/9efea0c9dcb970c1ca9ab3b6c1a38d115fe76b33/ramdisk/sbin/busybox?raw=true -O boot/ramdisk/sbin/busybox
+# Copy automount script
+cp patches/automount boot/ramdisk/sbin/automount
 
-# Fix automount script
-sed -i 's/grep system \/proc\/mounts/grep \/system \/proc\/mounts/g' boot/ramdisk/sbin/automount
-sed -i 's/grep data \/proc\/mounts/grep \/data \/proc\/mounts/g' boot/ramdisk/sbin/automount
-sed -i 's/grep cache \/proc\/mounts/grep \/cache \/proc\/mounts/g' boot/ramdisk/sbin/automount
-sed -i 's/grep preload \/proc\/mounts/grep \/preload \/proc\/mounts/g' boot/ramdisk/sbin/automount
+# Downloading F2FS binaries
+wget https://github.com/SamsungBCM-Cyanogenmod/android_device_samsung_s2vep/blob/9efea0c9dcb970c1ca9ab3b6c1a38d115fe76b33/ramdisk/sbin/busybox?raw=true -O boot/ramdisk/sbin/busybox
 
 # Repacking ramdisk
 cd boot
